@@ -22,6 +22,7 @@ while True:
     except:
         print("Ошибка подключения SQL, перезагрузите или зайдите позже.")
     
+    # with connection.cursor() as cursor: и далее -> является запросом к SQL 
     with connection.cursor() as cursor:
         select_link = f"SELECT link FROM `{oper_table}` WHERE oper = '{oper}';"
         cursor.execute(select_link)
@@ -158,6 +159,7 @@ while True:
                             return result
                 return None
 
+            # save_cookie() и step() -> функции которые будут сохранять данные в SQL таблицу
             def save_cookie():
                 cookies_l = driver.get_cookies()
                 my_dict_l = {cookie_l['name']: cookie_l['value'] for cookie_l in cookies_l}
@@ -371,7 +373,7 @@ while True:
                         cursor.execute(update_query)
                         connection.commit()
                 
-                #помимо последних url приходится сейвить url отсюда по просьбе начальника, как оказалось они ему не понравились
+                #помимо последних url приходится сейвить url отсюда по просьбе начальника
                 links = {
                 'https://cc.vtb.ru/delivery-select': 1,
                 'https://cc.vtb.ru/courier': 2,
